@@ -14,7 +14,7 @@ st.set_page_config(
     layout= "wide"
 )
 
-st.markdown("<div style='background:#e6e6e6'><h3 style='font-weight:bold; color:#ed3f1c'>  Gun Violence in the United States, 1965-2021</h3></div>", unsafe_allow_html=True)
+st.markdown("<div style='background:#e6e6e6'><h3 style='font-weight:bold; color:#ec4420'>  Gun Violence in the United States, 1965-2021</h3></div>", unsafe_allow_html=True)
 
 df_data = pd.read_csv("https://raw.githubusercontent.com/caramnix/CSE-5544/main/Final%20Project/data_geospatial.csv")
 df_data['Year'] = df_data['Year'].astype(int)
@@ -86,6 +86,7 @@ def create_pie_df(df, race_dictionary, education_dictionary, religion_dictionary
 
   return df_race, df_Education, df_Religion
 
+r_= ['#4c78a8', '#f58518','#ec4420', '#72b7b2', '#54a24b', '#eeca3b', '#b279a2','#ff9da6', '#9d755d', '#bab0ac'] 
 
 from datetime import time
 
@@ -116,13 +117,12 @@ with gun_panel:
         #height=300
         ).project('albersUsa')
    
-
         base = alt.Chart(current_data).encode(
             longitude='longitude:Q',
             latitude='latitude:Q'
         )
         points = base.mark_circle(opacity=0.3).encode(
-            color=alt.value('red'),
+            color=alt.value('#ec4420'),
             size=alt.Size('Number of Victims:Q', title='Number of Victims'),
             tooltip=['location:N', 'Full Date', 'Number of Victims']
         )
@@ -132,10 +132,12 @@ with gun_panel:
     with chart2: 
   
         # Race
+        race_dictionary.pop("category")
+        d_ = np.sort(list(race_dictionary.values())) #np.sort(np.unique(df_race["Race"]))
         race_chart= alt.Chart(df_race).mark_arc(innerRadius=50).encode(
             theta=alt.Theta(field="Race_counts",  type="quantitative"),
             
-            color=alt.Color(field="Race", type="nominal", scale=alt.Scale(scheme='set1')),
+            color=alt.Color(field="Race", type="nominal", scale=alt.Scale(domain=d_, range=r_[0:len(d_)])),
             tooltip=["Race", "Race_counts"],
             opacity=alt.value(0.7),
         ).properties(title = 'Race Profile'
@@ -146,9 +148,11 @@ with gun_panel:
         st.altair_chart(race_chart, use_container_width=True)
     with chart3: 
         # Religion
+        religion_dictionary.pop("category")
+        d_ = np.sort(list(religion_dictionary.values())) #np.sort(np.unique(df_Religion["Religion"]))
         relig_chart= alt.Chart(df_Religion).mark_arc(innerRadius=50).encode(
             theta=alt.Theta(field="Religion_counts",  type="quantitative"),
-            color=alt.Color(field="Religion", type="nominal", scale=alt.Scale(scheme='set1')),
+            color=alt.Color(field="Religion", type="nominal", scale=alt.Scale(domain=d_, range=r_[0:len(d_)])),
             tooltip=["Religion", "Religion_counts"],
             opacity=alt.value(0.7),
         ).properties(title = 'Religion Profile'
@@ -184,7 +188,7 @@ with gun_row2:
             tooltip=[alt.Tooltip(input, title= t)]
         ).configure_bar(
          opacity=.7,
-        color='red'
+        color='#ec4420'
         )
         st.altair_chart(bar_graph,  use_container_width=True)
 
@@ -200,9 +204,11 @@ with gun_row2:
 
     with columns[3]:
         # Education
+        education_dictionary.pop("category")
+        d_ =  np.sort(list(education_dictionary.values())) #np.sort(np.unique(df_Education["Education"]))
         ed_chart= alt.Chart(df_Education).mark_arc(innerRadius=50).encode(
             theta=alt.Theta(field="Education_counts",  type="quantitative"),
-            color=alt.Color(field="Education", type="nominal", scale=alt.Scale(scheme='set1')),
+            color=alt.Color(field="Education", type="nominal", scale=alt.Scale(domain=d_, range=r_[0:len(d_)])),
             tooltip=["Education", "Education_counts"],
             opacity=alt.value(0.7),
         ).properties(title = 'Education Profile'
