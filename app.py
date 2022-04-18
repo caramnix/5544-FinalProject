@@ -162,7 +162,7 @@ gun_row2 = st.container()
 
 with gun_row2:
 
-    columns = st.columns([3, 1, .2, 1,.5, 2])
+    columns = st.columns([4, 1, 1.5, 2.5])
     with columns[1]: 
         timespan = columns[1].radio(
             'Display',
@@ -188,7 +188,7 @@ with gun_row2:
         )
         st.altair_chart(bar_graph,  use_container_width=True)
 
-    with columns[3]: 
+    with columns[2]: 
         victim= alt.Chart(current_data).mark_bar().encode(
             #x='Relationship with Other Shooting(s)',
             y = alt.Y('count(Relationship with Other Shooting(s))', title=" ", axis=None),
@@ -198,7 +198,7 @@ with gun_row2:
         ).configure_view(strokeOpacity=0)
         st.altair_chart(victim, use_container_width = True)
 
-    with columns[5]:
+    with columns[3]:
         # Education
         ed_chart= alt.Chart(df_Education).mark_arc(innerRadius=50).encode(
             theta=alt.Theta(field="Education_counts",  type="quantitative"),
