@@ -103,7 +103,7 @@ with gun_panel:
         current_data= current_data.loc[current_data['Year'] <= max_year] 
     #current_data 
 
-    chart1, chart2, chart3 = st.columns([5,2,2])
+    chart1, chart2, chart3 = st.columns([5,2.1,2.2])
 
     airports = data.airports.url
     states = alt.topo_feature(data.us_10m.url, feature='states')
@@ -166,7 +166,7 @@ gun_row2 = st.container()
 
 with gun_row2:
 
-    columns = st.columns([4, 1, 1.5, 2.5])
+    columns = st.columns([4, 1.3, 1.1, 2.3])
     with columns[1]: 
         timespan = columns[1].radio(
             'Display',
@@ -195,8 +195,8 @@ with gun_row2:
     with columns[2]: 
         victim= alt.Chart(current_data).mark_bar().encode(
             #x='Relationship with Other Shooting(s)',
-            y = alt.Y('count(Relationship with Other Shooting(s))', title=" ", axis=None),
-            color=alt.Color(field="Relationship with Other Shooting(s)", type="nominal", legend=alt.Legend(title='Shooter Relationship'), scale=alt.Scale(scheme='set1')),
+            y = alt.Y('count(Relationship with Other Shooting(s))', title=" ", axis=None), 
+            color=alt.Color(field="Relationship with Other Shooting(s)", type="nominal", legend=alt.Legend(title='Shooter Relationship'), scale=alt.Scale(domain=["0", "1"], range=['#ec4420', '#72b7b2'])), #scheme='set1')),
             tooltip=[alt.Tooltip("count(Relationship with Other Shooting(s))", title='Count')],
             opacity=alt.value(0.8),
         ).configure_view(strokeOpacity=0)
