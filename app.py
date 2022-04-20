@@ -220,3 +220,5 @@ with gun_row2:
 
 
 st.caption("Data from [The Violence Project](https://www.theviolenceproject.org/)")
+st.caption("Visualizations by Cara Nix and Robert Frenken")
+
