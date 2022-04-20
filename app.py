@@ -196,7 +196,7 @@ with gun_row2:
         victim= alt.Chart(current_data).mark_bar().encode(
             #x='Relationship with Other Shooting(s)',
             y = alt.Y('count(Relationship with Other Shooting(s))', title=" ", axis=None), 
-            color=alt.Color(field="Relationship with Other Shooting(s)", type="nominal", legend=alt.Legend(title='Shooter Relationship'), scale=alt.Scale(domain=["0", "1"], range=['#ec4420', '#72b7b2'])), #scheme='set1')),
+            color=alt.Color(field="Relationship with Other Shooting(s)", type="nominal", legend=alt.Legend(title='Copy Cat Shooting?'), scale=alt.Scale(domain=["0", "1"], range=['#ec4420', '#72b7b2'])), #scheme='set1')),
             tooltip=[alt.Tooltip("count(Relationship with Other Shooting(s))", title='Count')],
             opacity=alt.value(0.8),
         ).configure_view(strokeOpacity=0)
