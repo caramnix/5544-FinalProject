@@ -14,7 +14,7 @@ st.set_page_config(
     layout= "wide"
 )
 
-st.markdown("<div style='background:#e6e6e6'><h3 style='font-weight:bold; color:#ec4420'>  Gun Violence in the United States, 1965-2021</h3></div>", unsafe_allow_html=True)
+st.markdown("<div style='background:#fff'><h3 style='font-weight:bold; color:#ec4420'>  Gun Violence in the United States, 1965-2021</h3></div>", unsafe_allow_html=True)
 
 df_data = pd.read_csv("https://raw.githubusercontent.com/caramnix/CSE-5544/main/Final%20Project/data_geospatial.csv")
 df_data['Year'] = df_data['Year'].astype(int)
@@ -192,15 +192,15 @@ with gun_row2:
         )
         st.altair_chart(bar_graph,  use_container_width=True)
 
-    with columns[2]: 
-        victim= alt.Chart(current_data).mark_bar().encode(
-            #x='Relationship with Other Shooting(s)',
-            y = alt.Y('count(Relationship with Other Shooting(s))', title=" ", axis=None), 
-            color=alt.Color(field="Relationship with Other Shooting(s)", type="nominal", legend=alt.Legend(title='Copy Cat Shooting?'), scale=alt.Scale(domain=["0", "1"], range=['#ec4420', '#72b7b2'])), #scheme='set1')),
-            tooltip=[alt.Tooltip("count(Relationship with Other Shooting(s))", title='Count')],
-            opacity=alt.value(0.8),
-        ).configure_view(strokeOpacity=0)
-        st.altair_chart(victim, use_container_width = True)
+    #with columns[2]: 
+   #     victim= alt.Chart(current_data).mark_bar().encode(
+   #         #x='Relationship with Other Shooting(s)',
+   #         y = alt.Y('count(Relationship with Other Shooting(s))', title=" ", axis=None), 
+   #         color=alt.Color(field="Relationship with Other Shooting(s)", type="nominal", legend=alt.Legend(title='Copy Cat Shooting?'), scale=alt.Scale(domain=["0", "1"], range=['#ec4420', '#72b7b2'])), #scheme='set1')),
+  #          tooltip=[alt.Tooltip("count(Relationship with Other Shooting(s))", title='Count')],
+   #         opacity=alt.value(0.8),
+   #     ).configure_view(strokeOpacity=0)
+   #     st.altair_chart(victim, use_container_width = True)
 
     with columns[3]:
         # Education
