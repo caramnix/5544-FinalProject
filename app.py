@@ -63,16 +63,16 @@ def create_pie_df(df, race_dictionary, education_dictionary, religion_dictionary
   race_counts = df['Race'].value_counts(dropna=False) # get counts of each value 
   df_race = pd.DataFrame(race_counts) # turn to df
   df_race.reset_index(inplace=True) # shift index over to column
-  df_race['index'] = df_race['index'].astype(str) 
-  df_race.replace({"index": race_dictionary}, inplace=True) # replace index values with categorical values from dictionary
+  #df_race['index'] = df_race['index'].astype(str) 
+  df_race.replace({"Race": race_dictionary}, inplace=True) # replace index values with categorical values from dictionary
   df_race.rename(columns={"Race": "Race_counts", "index": "Race"}, inplace=True)
 
   # create education df
   Education_counts = df['Education'].value_counts(dropna=False)
   df_Education = pd.DataFrame(Education_counts)
   df_Education.reset_index(inplace=True)
-  df_Education['index'] = df_Education['index'].astype(str)
-  df_Education.replace({"index": education_dictionary}, inplace=True)
+  #df_Education['index'] = df_Education['index'].astype(str)
+  df_Education.replace({"Education": education_dictionary}, inplace=True)
   df_Education.rename(columns={"Education": "Education_counts", "index": "Education"}, inplace=True)
 
 
@@ -80,8 +80,8 @@ def create_pie_df(df, race_dictionary, education_dictionary, religion_dictionary
   Religion_counts = df['Religion'].value_counts(dropna=False)
   df_Religion = pd.DataFrame(Religion_counts)
   df_Religion.reset_index(inplace=True)
-  df_Religion['index'] = df_Religion['index'].astype(str)
-  df_Religion.replace({"index": religion_dictionary}, inplace=True)
+  #df_Religion['index'] = df_Religion['index'].astype(str)
+  df_Religion.replace({"Religion": religion_dictionary}, inplace=True)
   df_Religion.rename(columns={"Religion": "Religion_counts", "index": "Religion"}, inplace=True)
 
   return df_race, df_Education, df_Religion
